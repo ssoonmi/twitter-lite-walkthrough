@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
     }
-
+    
     static associate(models) {
-      // define association here
+      User.hasMany(models.Tweet, { foreignKey: "userId" });
     }
   };
   User.init(

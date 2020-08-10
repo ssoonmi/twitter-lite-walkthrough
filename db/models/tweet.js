@@ -10,15 +10,31 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Tweet.belongsTo(models.User, { foreignKey: 'userId' });
     }
   };
-  Tweet.init({
-    message: DataTypes.STRING,
-    userId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Tweet',
-  });
+  Tweet.init(
+    {
+      message: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          // save, update, create
+          len: {
+            args: [1, 280],
+            msg: "Message must be between 1 and 280 characters.",
+          },
+        },
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      }
+    },
+    {
+      sequelize,
+      modelName: "Tweet",
+    }
+  );
   return Tweet;
 };
