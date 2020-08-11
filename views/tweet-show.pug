@@ -1,0 +1,11 @@
+extends main-layout.pug
+
+append head
+  link(rel="stylesheet" href="/public/css/tweet-show.css")
+  script(src="/public/js/tweet-show.js" type="module" defer)
+
+block feed
+  .tweet-show
+    .tweet-show-header
+      h1 Thread
+    .tweet-thread

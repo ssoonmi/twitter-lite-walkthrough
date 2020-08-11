@@ -9,7 +9,7 @@ exports.getUserToken = (user) => {
   return jwt.sign(
     { id: user.id, username: user.username },
     secret,
-    { expiresIn } // expressed in seconds
+    { expiresIn: parseInt(expiresIn) } // expressed in seconds
   );
 };
 

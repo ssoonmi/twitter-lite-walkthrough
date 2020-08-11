@@ -3,9 +3,11 @@ const router = express.Router();
 const { environment } = require('../../config');
 
 const usersRouter = require('./users');
+const tweetsRouter = require('./tweets');
 const { ValidationError } = require("sequelize");
 
 router.use('/users', usersRouter);
+router.use('/tweets', tweetsRouter);
 
 router.use((err, req, res, next) => {
   if (err instanceof ValidationError) {

@@ -19,13 +19,20 @@ router.get('/signup', csrfProtection, (req, res) => {
   res.render("signup", { csrf: req.csrfToken() });
 });
 
-router.get('/home', (req, res) => {
+router.get('/home', csrfProtection, (req, res) => {
   if (!req.user) {
     res.redirect("/login");
     return;
   }
-  console.log(req.user);
-  res.render('home', { username: req.user.username });
+  res.render("home", { username: req.user.username, csrf: req.csrfToken() });
+});
+
+router.get('/tweets/:id', (req, res) => {
+  if (!req.user) {
+    res.redirect("/login");
+    return;
+  }
+  res.render("tweet-show", { username: req.user.username })
 });
 
 router.get('*', (req, res) => {
