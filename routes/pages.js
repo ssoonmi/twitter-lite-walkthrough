@@ -3,6 +3,15 @@ const router = express.Router();
 
 const csrfProtection = require("csurf")({ cookie: true });
 
+router.get('/', (req, res) => {
+  if (req.user) {
+    res.redirect('/home');
+    return;
+  }
+  res.redirect('/login');
+  return;
+});
+
 router.get('/login', csrfProtection, (req, res) => {
   if (req.user) {
     res.redirect('/home');
